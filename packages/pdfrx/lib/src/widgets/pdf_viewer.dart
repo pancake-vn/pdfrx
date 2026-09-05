@@ -1599,20 +1599,20 @@ class _PdfViewerState extends State<PdfViewer>
           callback(canvas, rect, page);
         }
       }
+    }
 
-      if (unusedPageList.isNotEmpty) {
-        final currentPageNumber = _pageNumber;
-        if (currentPageNumber != null && currentPageNumber > 0) {
-          final currentPage = _document!.pages[currentPageNumber - 1];
-          cache.removeCacheImagesIfCacheBytesExceedsLimit(
-            unusedPageList,
-            maxImageCacheBytes,
-            currentPage,
-            dist: (pageNumber) =>
-                (_layout!.pageLayouts[pageNumber - 1].center - _layout!.pageLayouts[currentPage.pageNumber - 1].center)
-                    .distanceSquared,
-          );
-        }
+    if (unusedPageList.isNotEmpty) {
+      final currentPageNumber = _pageNumber;
+      if (currentPageNumber != null && currentPageNumber > 0) {
+        final currentPage = _document!.pages[currentPageNumber - 1];
+        cache.removeCacheImagesIfCacheBytesExceedsLimit(
+          unusedPageList,
+          maxImageCacheBytes,
+          currentPage,
+          dist: (pageNumber) =>
+              (_layout!.pageLayouts[pageNumber - 1].center - _layout!.pageLayouts[currentPage.pageNumber - 1].center)
+                  .distanceSquared,
+        );
       }
     }
   }
